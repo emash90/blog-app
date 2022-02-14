@@ -7,9 +7,11 @@ const { render } = require('ejs')
 const port = 3000
 const blogRoutes = require('./routes/blogRoutes')
 const Blog = require('./models/blog')
+const { db } = require('./models/blog')
+const { title } = require('process')
 
 
-//connecting to our mongoDB database
+//connecting to the mongoDB database
 
 const dbURI = 'mongodb+srv://emash90:Classic105.@nodetut.mmtu1.mongodb.net/nodetutorial?retryWrites=true&w=majority'
 mongoose.connect(dbURI)
@@ -50,6 +52,12 @@ app.use(express.urlencoded({ extended: true}))
 //     }) 
 // })
 
+/*app.get('', (req, res) => {
+
+   
+   })*/
+
+
 app.delete('/blogs/:id', (req, res) => {
     const id = req.params.id
 
@@ -60,13 +68,19 @@ app.delete('/blogs/:id', (req, res) => {
     .catch(err => {console.log(err)})
 })
 app.patch('/blogs/:id', (req, res) => {
-    const id = req.params.id
-    Blog.findByIdAndUpdate(id, req.body, {$set: {title: 'title', snippet: 'snippet', body: 'body'}})
+    const { id } = req.params.id
+    const updateObject = req.body
+    Blog.findByIdAndUpdate(id, updateObject, {$set: updateObject})
     .then(result => {
-        res.send(Blog)
+        res.json({ redirect: '/blogs/:id'})
     })
     .catch(err => {console.log(err)})
 })
+
+
+
+
+
 
 app.get('/', (req, res) => {
     const blogs = 

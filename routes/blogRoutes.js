@@ -7,6 +7,7 @@ router.get('', blogController.blog_index)
 
 router.post('', blogController.blog_create_get)
 
+router.patch('/:id',blogController.blog_create_get )
 
 router.get('/:id', blogController.blog_details)
 module.exports = router

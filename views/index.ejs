@@ -3,6 +3,11 @@
     <%-include('./partials/header.ejs')  %>
 <body>
     <%-include('./partials/nav.ejs')%>
+
+    <form class="search" action="/blogs/search" method="GET">
+        <input class="bar" type="text" placeholder="Search blog..." name="blogTitle">
+        <button><i class="fa fa-search"></i></button>
+    </form>
     
     <div class="blogs content">
         <h2>all blogs</h2>

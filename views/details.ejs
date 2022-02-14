@@ -10,16 +10,17 @@
             <p><%= blog.body %> </p>
            
         </div>
-       <a class="delete" data-doc="<%= blog._id %> ">delete</a>
+       <a class="delete" data-doc="<%= blog._id %> "> <i class="fa fa-trash-o" style="font-size: 24px;"></i> </a>
 
-       <a class="update" data-upt="<%= blog._id %> ">update</a>
+       <a class="update" data-upt="<%= blog._id %> "> <i class='fa fa-edit' style="font-size:24px; color: aliceblue;"></i> </a>
 
     </div>
     <%-include('./partials/footer.ejs')  %>
     <script>
-        const trashCan = document.querySelector('a.delete')
-        trashCan.addEventListener('click', (e) => {
-            const endpoint = `/blogs/${trashCan.dataset.doc}`
+        const trashcan = document.querySelector('a.delete')
+        trashcan.addEventListener('click', (e) => {
+
+            const endpoint = `/blogs/${trashcan.dataset.doc}`
 
             fetch(endpoint, {
                 method: 'DELETE'
@@ -34,13 +35,13 @@
             const endpoint = (`/blogs/${updateButton.dataset.upt}`)
 
             fetch(endpoint, {
-                method: 'PATCH'
-            })
-            .then((response) => response.json())
-            .then((data) => window.location.href = data.redirect )
-            .catch(err => console.log(err))
+                 method: 'PATCH'
+             })
+             .then((response) => response.json())
+             .then((data) => window.location.href = '/create' )
+             .catch(err => console.log(err))
 
-        })
+         })
         </script>
 
 
